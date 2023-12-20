@@ -1,22 +1,22 @@
 Docker commands(on Linux requires sudo in the beginning of the command):
-	>docker build -t python3-test .
+	> docker build -t python3-test .
 		Builds an image from the Dockerfile that is self turn must be present in current dir tagged with 
 		'python3-tes' name. '.' stands for location of target DoOckerfile.
 
-	>docker run python3-test
+	> docker run python3-test
 		Runs previously build image tagged as ' python3-test'
 
-	>docker image ls
-	>docker images
+	> docker image ls
+	> docker images
 		Lists existent docker images
 
-	>docker ps -a
+	> docker ps -a
 		Lists existent docker containers
 
-	>docker run -it <image id> bash
+	> docker run -it <image id> bash
 		Runs docker container in interactive mode with running command, e.g. 'bash' in this case (the last option)
 
-	>docker run -d -t <image id>
+	> docker run -d -t <image id>
 		Runs docker image making a new container for indefinite time
 		Get container name by running:
 			>docker ps -a
@@ -26,32 +26,41 @@ Docker commands(on Linux requires sudo in the beginning of the command):
 			>docker start <contaoner id>
 				Container will be run with the same mode, e.g. '-d -t'
 
-	>docker compose up -d
+	> docker compose up -d
 		Runs container through 'compose', '-d' means daemon
 
-	>docker-build compose up -d
+	> docker-build compose up -d
 		Builds and run through 'compose', '-d' means daemon
 
-	>docker exec -it <container id> /bin/bash
+	> docker exec -it <container id> /bin/bash
 		Executes a command '/bin/bash' in container 'container id' in interactive (-i) teletype(-t) mode
 
-	>docker stop <container id>
+	> docker stop <container id>
 		Stops currently running container
 
-	>docker start <container id>
+	> docker start <container id>
 		Starts previusly stopped container by container is. Container with such id must be present in 
 		'>docker ps -a' output and be mentioned as 'Exited'
 
-	>docker rm -f <container id>[ contaoner-id [ ...]]
+	> docker rm -f <container id>[ contaoner-id [ ...]]
 		Removes one of more containers. '-f' means forced
 
-	>docker rmi <image id>[ <image id>[ ...]]
+	> docker rmi <image id>[ <image id>[ ...]]
 		Removes one or more images
 	
 
 If the error below appears:
 	"Error response from daemon: network 0a0b68620874cb7a3a41822d9fab2e490efefcd9e789a0ff881fc6df8c5a9301 not found"
-try to run a command: 
-	>docker-compose up --force-recreate
-	got it here: https://stackoverflow.com/questions/39640963/error-response-from-daemon-network-myapp-not-found
+	try to run a command: 
+		> docker-compose up --force-recreate
+	got it from here: https://stackoverflow.com/questions/39640963/error-response-from-daemon-network-myapp-not-found
 
+If occationally docker daemon is not running this can be found by running any 'sudo docker ...' 
+	stating that supposedly docker daemon is not running then first run the command:
+		> sudo docker info
+	If this command fails then check status of daemon running the following:
+		> sudo systemctl status daemon
+	If docker is not running then
+		> sudo systemctl start docker
+	And then check docker status by calling 
+		> sudo docker info
