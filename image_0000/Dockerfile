@@ -32,4 +32,4 @@ RUN apt-get --yes install nano
 RUN apt-get --yes install mc
 
 # Installing 32bit build tools libraries and headers
-RUN apt --yes install gcc-multilib g++-multilib
+RUN apt-get --yes install gcc-multilib g++-multilib

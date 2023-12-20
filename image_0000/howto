@@ -1,11 +1,11 @@
 RATIONALE:
-	This document describes how to create a docker image from existent Dockerfile, build and run contaner 
+	This document describes how to create a docker image from existent Dockerfile, build and run a container 
 	from it. Also how to stop, start, remove the container and finally remove the image.
 
 IMAGE:
-	This is the test image that contains tools to build C/C++ code for 64bit and 32bit platforms. Also
+	This is the test image that contains tools to build C/C++ code for 64-bit and 32-bit platforms. Also
 	it contains a console text editor(nano) and a file manager(midnight commander). This docker does not 
-	yet support networking.
+	support networking at least yet.
 
 HOWTO:
 	1. Install docker:
@@ -96,8 +96,6 @@ HOWTO:
 		>sudo docker images
 	    Ensure that command output does not contain a row with ids of deleted image
 
-	14. Close the ducment. Turn off your computer. Relax and have some tea of coffie. 
-	    Now you know docker ;-)
-
-Cheers!
+	14. Close the document. Turn off your computer. Relax and have a cup tea or coffie. 
+	    Now you know docker ;-) Cheers!
 
