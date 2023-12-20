@@ -47,6 +47,9 @@ Docker commands(on Linux requires sudo in the beginning of the command):
 
 	> docker rmi <image id>[ <image id>[ ...]]
 		Removes one or more images
+
+	> docker logs <container id>
+		Prints out resent container logs
 	
 
 If the error below appears:
@@ -56,11 +59,15 @@ If the error below appears:
 	got it from here: https://stackoverflow.com/questions/39640963/error-response-from-daemon-network-myapp-not-found
 
 If occationally docker daemon is not running this can be found by running any 'sudo docker ...' 
-	stating that supposedly docker daemon is not running then first run the command:
+	stating that supposedly docker daemon is not running like this:
+		"ERROR: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?"
+	First, run the command:
 		> sudo docker info
 	If this command fails then check status of daemon running the following:
 		> sudo systemctl status daemon
+		reply will contain: 'Active: inactive (dead)'
 	If docker is not running then
 		> sudo systemctl start docker
 	And then check docker status by calling 
 		> sudo docker info
+

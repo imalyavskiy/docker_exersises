@@ -1,0 +1,5 @@
+> sudo docker build -t test.image .
+
+> sudo docker run -d --name test.container -p 8080:8080 test.image
+
+> sudo docker ps -a
