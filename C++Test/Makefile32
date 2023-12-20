@@ -1,0 +1,7 @@
+CFLAGS=-m32
+build: clean prepare test.cpp
+	g++ $(CFLAGS) test.cpp -o ./_bin32/test
+clean:
+	if [ -d ./_bin32 ] ; then rm -rf ./_bin32; fi
+prepare:
+	if [ ! -d ./_bin32 ] ; then mkdir ./_bin32; fi

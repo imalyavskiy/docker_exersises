@@ -1,0 +1,7 @@
+CFLAGS=
+build: clean prepare test.cpp
+	g++ $(CFLAGS) test.cpp -o ./_bin64/test
+clean:
+	if [ -d ./_bin64 ] ; then rm -rf ./_bin64; fi
+prepare:
+	if [ ! -d ./_bin64 ] ; then mkdir ./_bin64; fi

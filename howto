@@ -1,0 +1,103 @@
+RATIONALE:
+	This document describes how to create image from existent Dockerfile, build and run contaner from it.
+	Also how to stop, start, removecontainer and finally remove an image.
+
+IMAGE:
+	This is the test image that contains tools to build C/C++ code for 64bit and 32bit platforms. Also
+	it tuned up to contain base editor(nano) and file manager(midnight commander). This docker does not 
+	support networking yet.
+
+HOWTO:
+	1. Install docker:
+		>sudo apt-get install docker
+
+	2. Build a docker image:
+		>sudo docker build -t my-ubuntu-22.04:0000 .
+			'-t my-ubuntu-22.04:000' - tagging the new image with label
+			'.' - stands for current dir, Dockerfile must be located here
+	3. Ensure the image is accessible
+		>sudo docker image ls
+	   or
+		>sudo docker images
+	   log is:
+
+		REPOSITORY        TAG       IMAGE ID       CREATED          SIZE
+		my-ubuntu-22.04   0000      c26111336fc6   12 minutes ago   617MB
+		ubuntu            22.04     174c8c134b2a   7 days ago       77.9MB
+
+	4. Run docker comtainer from just built image by use either the name 
+	   mentioned in the first  column (see REPOSITORY) followed by colon(:) and value of 
+	   tag(see TAG column) or image id from the third column alone.
+		>sudo docker run -t -d my-ubuntu-22.0:0000
+	   or
+		>sudo docker run -t -d c26111336fc
+	   command will reply with some string composed of hexademical symbols, e.g.
+		4b1ff1f3888e9600ebef26fbe0c804f9d196038b4b9af9fccf0f890b6b9251cb
+	   where first 6 symbol pairs are so called 'container id'
+
+	5. Check container exists and running
+		>sudo docker ps -a
+	   log is:
+
+		CONTAINER ID   IMAGE          COMMAND       CREATED         STATUS         PORTS     NAMES
+		4b1ff1f3888e   c26111336fc6   /bin/bash   2 minutes ago   Up 2 minutes             thirsty_torvalds
+
+	   Ensure that column 'CONTAINER ID' contains first 6 symbol pairs from previous command reslut output
+	   Also you may chack that in row with correct container id value of 'IMAGE' column correponds with
+	   image id used to create the docker contaner.
+
+	6. Run the command from pt.5 to ensure that container remains running, e.g. in the 'STATUS' column of the 
+	   just run container value is 'Up *** minutes' or something similar but not 'Exited ...'
+
+	7. Run shell within the container
+		>sudo docker exec -i -t 4b1ff1f3888e /bin/bash
+	   Within your current shell new shell will open that is executed in the container.
+
+	8. Stop running container by its id:
+		>sudo docker stop 4b1ff1f3888e
+	   Command will reply with container id
+	   Or stop container by its name taken from the 'NAME' column
+		>sudo docker stop thirsty_torvalds
+	   Command will reply with given name
+
+	9. Check container status:
+		>sudo docker ps -a
+	   Command will reply with:
+	
+		CONTAINER ID   IMAGE          COMMAND       CREATED          STATUS                       PORTS     NAMES
+		4b1ff1f3888e   c26111336fc6   /bin/bash   16 minutes ago   Exited (137) 2 minutes ago             thirsty_torvalds
+
+	   Note that in column status of row with just created container id value is:
+		'Exited (137) 2 minutes ago'
+
+	10. Start stopped container again:
+	    by id
+		>sudo docker start 4b1ff1f3888e
+	    by name
+		>sudo docker start thirsty_torvalds
+	    Command will reply with given id or name	
+
+	11. Remove docker container:
+		>sudo docker rm 4b1ff1f3888e
+	    If command will reply with error add '-f' flag	
+		>sudo docker rm -f 4b1ff1f3888e
+	    Command output will be the id of the just removed container, e.g. 4b1ff1f3888e	
+
+	12. Remove image:
+	    By its image id
+		>sudo docker rmi c26111336fc6
+	    Or by its name and tag
+		>sudo my-ubuntu-22.04:0000
+	    Command will reply with given value(container id or 'image id':'tag'
+
+	13. Check that image was removed
+		>sudo docker image ls
+	    or
+		>sudo docker images
+	    Ensure that command output does not contain a row with ids of deleted image
+
+	14. Close the ducment. Turn off your computer. Relax and have some tea of coffie. 
+	    Now you know docker ;-)
+
+Cheers!
+

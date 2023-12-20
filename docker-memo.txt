@@ -41,6 +41,12 @@ Docker commands(on Linux requires sudo in the beginning of the command):
 	>docker start <container id>
 		Starts previusly stopped container by container is. Container with such id must be present in 
 		'>docker ps -a' output and be mentioned as 'Exited'
+
+	>docker rm -f <container id>[ contaoner-id [ ...]]
+		Removes one of more containers. '-f' means forced
+
+	>docker rmi <image id>[ <image id>[ ...]]
+		Removes one or more images
 	
 
 If the error below appears:
