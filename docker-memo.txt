@@ -50,7 +50,18 @@ Docker commands(on Linux requires sudo in the beginning of the command):
 
 	> docker logs <container id>
 		Prints out resent container logs
-	
+
+	> docker image tag server:latest myname/server:latest
+	> docker image tag d583c3ac45fd myname/server:latest
+		Renames exitstent repository aka image
+
+	> docker rename <old container name> <new container name>
+		Renames existent container
+
+	> docker run -t -i -v <host_dir>:<container_dir>  <image name/id> <command to run>
+		Runs a new container with directory from host file mounted to container filesystem at 
+		mentioned location
+		example: docker run -t -i -v <host_dir>:<container_dir>  ubuntu /bin/bash
 
 If the error below appears:
 	"Error response from daemon: network 0a0b68620874cb7a3a41822d9fab2e490efefcd9e789a0ff881fc6df8c5a9301 not found"
